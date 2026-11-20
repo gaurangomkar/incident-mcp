@@ -1,0 +1,30 @@
+name: Bug report
+description: incident-mcp did the wrong thing
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for writing this up. Do not paste live tokens, kubeconfigs, or unredacted customer data.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, what you expected, and what you got. Include the tool name if a tool call failed.
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Version and client
+      description: Output of `incident-mcp -version`, the transport (stdio or http), and the client (Claude Desktop, Cursor, VS Code, other).
+    validations:
+      required: true
+  - type: textarea
+    id: config
+    attributes:
+      label: Config
+      description: Redacted config. Remove tokens. The shape of the file is enough.
+    validations:
+      required: false
