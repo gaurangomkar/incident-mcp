@@ -1,0 +1,54 @@
+version: 2
+
+project_name: incident-mcp
+
+builds:
+  - id: incident-mcp
+    main: ./cmd/incident-mcp
+    binary: incident-mcp
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - LICENSE
+      - README.md
+      - examples/config.yaml
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+  use: git
+  filters:
+    exclude:
+      - "^docs:"
+      - "^ci:"
+      - "^test:"
+      - "^chore:"
+
+release:
+  github:
+    owner: gaurangomkar
+    name: incident-mcp
+  footer: |
+    Container images for a tag are published to ghcr.io/gaurangomkar/incident-mcp.
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"

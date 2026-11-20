@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "incident": {
+      "command": "incident-mcp",
+      "args": ["-config", "/absolute/path/to/incident-mcp.yaml"]
+    }
+  }
+}
