@@ -1,0 +1,59 @@
+# Example incident-mcp configuration.
+# Copy to incident-mcp.yaml (or pass -config) and edit the URLs.
+# Environment variables override this file. See docs/configuration.md.
+
+server:
+  # stdio is what Claude Desktop, Cursor, and VS Code launch.
+  # Use http only when a remote client connects over the network.
+  transport: stdio
+  http_addr: 127.0.0.1:8080
+  # Required when http_addr is not a loopback address.
+  # bearer_token_file: /var/run/incident-mcp/token
+
+log_level: info
+timeout: 20s
+redact: true
+
+limits:
+  max_output_bytes: 32768
+  max_prom_series: 50
+  max_prom_samples: 200
+  max_range: 24h
+  max_log_lines: 200
+  max_events: 50
+  max_pods: 200
+  max_alerts: 100
+  max_query_bytes: 8192
+
+prometheus:
+  url: http://127.0.0.1:9090
+  timeout: 20s
+  # bearer_token_file: /var/run/secrets/prometheus/token
+  # username: ""
+  # password: ""
+  # insecure_skip_verify: false
+
+alertmanager:
+  url: http://127.0.0.1:9093
+  timeout: 20s
+
+kubernetes:
+  # Empty uses client-go's normal lookup: KUBECONFIG, then ~/.kube/config,
+  # then in-cluster config when those are absent.
+  kubeconfig: ""
+  context: ""
+  timeout: 20s
+  # Uncomment before pointing this at a shared or production cluster.
+  # An empty list allows every namespace.
+  # allowed_namespaces:
+  #   - payments
+  #   - prod
+
+# triage.queries replaces the built-in queries when set.
+# Fields are Namespace and Service. The re function quotes a value for PromQL regex.
+# triage:
+#   log_lines: 80
+#   event_limit: 15
+#   queries:
+#     - name: up
+#       expr: 'up{namespace="{{.Namespace}}",pod=~"{{.Service | re}}-.+"}'
