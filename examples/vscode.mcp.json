@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "incident": {
+      "type": "stdio",
+      "command": "incident-mcp",
+      "args": ["-config", "/absolute/path/to/incident-mcp.yaml"]
+    }
+  }
+}
