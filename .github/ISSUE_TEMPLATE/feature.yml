@@ -1,0 +1,23 @@
+name: Feature request
+description: A tool, backend, or safety control that would make triage better
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read-only is the default. If the idea writes to a cluster or to Alertmanager, say so in the first sentence and explain the guardrail you have in mind.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The incident question this would answer
+      description: What you cannot ask the assistant today.
+    validations:
+      required: true
+  - type: textarea
+    id: shape
+    attributes:
+      label: Proposed tool or change
+      description: Name, inputs, and what the output should contain. Mention any new allowlist, timeout, or redaction concern.
+    validations:
+      required: true
